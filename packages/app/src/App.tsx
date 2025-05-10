@@ -9,6 +9,7 @@ import {
   CatalogImportPage,
   catalogImportPlugin,
 } from '@backstage/plugin-catalog-import';
+import { ProductsExplorerPage } from './components/products';
 import { ScaffolderPage, scaffolderPlugin } from '@backstage/plugin-scaffolder';
 import { orgPlugin } from '@backstage/plugin-org';
 import { SearchPage } from '@backstage/plugin-search';
@@ -64,6 +65,7 @@ const routes = (
   <FlatRoutes>
     <Route path="/" element={<Navigate to="catalog" />} />
     <Route path="/catalog" element={<CatalogIndexPage />} />
+    <Route path="/products" element={<ProductsExplorerPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
       element={<CatalogEntityPage />}

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="200" viewBox="0 0 800 200">
+  <rect width="100%" height="100%" fill="#f7f7f7" />
+  <g transform="translate(400,100)">
+    <g fill="#e0e0e0">
+      <rect x="-200" y="-50" width="400" height="100" rx="5" />
+    </g>
+    <g fill="#2E77D0" opacity="0.7">
+      <circle cx="-120" cy="0" r="40" />
+      <rect x="-70" y="-30" width="240" height="10" rx="2" />
+      <rect x="-70" y="-10" width="180" height="8" rx="2" />
+      <rect x="-70" y="10" width="200" height="8" rx="2" />
+      <rect x="-70" y="30" width="160" height="8" rx="2" />
+    </g>
+    <g transform="translate(120, -35)">
+      <path d="M10,0 L30,0 L40,20 L30,40 L10,40 L0,20 Z" fill="#2E77D0" opacity="0.9" />
+      <text
+        font-family="Arial, sans-serif"
+        font-size="12"
+        fill="white"
+        text-anchor="middle"
+        x="20"
+        y="25">
+        PRODUCT
+      </text>
+    </g>
+  </g>
+</svg>
