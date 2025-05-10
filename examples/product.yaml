@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Product
+metadata:
+  name: backstage-product
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/backstage/backstage/tree/master/examples/product.yaml
+    backstage.io/managed-by-origin-location: url:https://github.com/backstage/backstage/tree/master/examples/product.yaml
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
+  components:
+    - example-website
+  systems:
+    - examples

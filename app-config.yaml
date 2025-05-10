@@ -76,7 +76,7 @@ catalog:
     entityFilename: catalog-info.yaml
     pullRequestBranchName: backstage-integration
   rules:
-    - allow: [Component, System, API, Resource, Location]
+    - allow: [Component, System, API, Resource, Location, Product]
   locations:
     # Local example data, file locations are relative to the backend process, typically `packages/backend`
     - type: file
@@ -93,6 +93,12 @@ catalog:
       target: ../../examples/org.yaml
       rules:
         - allow: [User, Group]
+
+    # Local example product data
+    - type: file
+      target: ../../examples/product.yaml
+      rules:
+        - allow: [Product]
 
     ## Uncomment these lines to add more example data
     # - type: url

@@ -27,6 +27,7 @@ backend.add(import('@backstage/plugin-catalog-backend'));
 backend.add(
   import('@backstage/plugin-catalog-backend-module-scaffolder-entity-model'),
 );
+backend.add(import('@internal/plugin-catalog-backend-module-product'));
 
 // See https://backstage.io/docs/features/software-catalog/configuration#subscribing-to-catalog-errors
 backend.add(import('@backstage/plugin-catalog-backend-module-logs'));
