@@ -38,6 +38,8 @@ export class ProductEntitiesProcessor implements CatalogProcessor {
     const productSpec = entity.spec as {
       components?: string[];
       systems?: string[];
+      parentProduct?: string;
+      childProducts?: string[];
     };
 
     // Establish relationships with components
@@ -58,6 +60,26 @@ export class ProductEntitiesProcessor implements CatalogProcessor {
           source: { kind: 'Product', namespace: entity.metadata.namespace || 'default', name: entity.metadata.name },
           type: 'hasPart',
           target: { kind: 'System', namespace: entity.metadata.namespace || 'default', name: systemName },
+        }));
+      }
+    }
+
+    // Establish relationship with parent product
+    if (productSpec.parentProduct) {
+      emit(processingResult.relation({
+        source: { kind: 'Product', namespace: entity.metadata.namespace || 'default', name: entity.metadata.name },
+        type: 'childOf',
+        target: { kind: 'Product', namespace: entity.metadata.namespace || 'default', name: productSpec.parentProduct },
+      }));
+    }
+
+    // Establish relationships with child products
+    if (productSpec.childProducts && productSpec.childProducts.length > 0) {
+      for (const childProductName of productSpec.childProducts) {
+        emit(processingResult.relation({
+          source: { kind: 'Product', namespace: entity.metadata.namespace || 'default', name: entity.metadata.name },
+          type: 'parentOf',
+          target: { kind: 'Product', namespace: entity.metadata.namespace || 'default', name: childProductName },
         }));
       }
     }

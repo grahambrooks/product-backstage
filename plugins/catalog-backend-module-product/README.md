@@ -44,6 +44,11 @@ spec:
   type: service
   lifecycle: experimental
   owner: team-a
+  market: north-america  # Optional market attribute
+  parentProduct: parent-product  # Optional reference to parent product
+  childProducts:  # Optional list of child products
+    - child-product-1
+    - child-product-2
   components:
     - component-1
     - component-2
@@ -51,4 +56,14 @@ spec:
     - system-1
 ```
 
-This will create a Product entity that is associated with the components "component-1" and "component-2", and the system "system-1".
+This will create a Product entity that is associated with the components "component-1" and "component-2", and the system "system-1". The product belongs to the North America market, has a parent product called "parent-product", and two child products "child-product-1" and "child-product-2".
+
+## Product Nesting
+
+Product entities can be organized hierarchically. Use the `parentProduct` field to specify a parent product and `childProducts` to list any child products. The processor will automatically create bidirectional relationships between parent and child products with the relation types `parentOf` and `childOf`.
+
+See the [nested products example](./examples/nested-products.yaml) for a complete demonstration of product hierarchy with multiple nesting levels.
+
+## Market Attribute
+
+The optional `market` attribute can be used to categorize products by geographical market or business segment. This can be useful for filtering and organizing products in the catalog.

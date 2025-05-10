@@ -99,6 +99,10 @@ catalog:
       target: ../../examples/product.yaml
       rules:
         - allow: [Product]
+    - type: file
+      target: ../../plugins/catalog-backend-module-product/examples/nested-products.yaml
+      rules:
+        - allow: [Product]
 
     ## Uncomment these lines to add more example data
     # - type: url

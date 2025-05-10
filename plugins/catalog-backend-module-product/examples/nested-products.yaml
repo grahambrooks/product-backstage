@@ -1,0 +1,86 @@
+apiVersion: backstage.io/v1alpha1
+kind: Product
+metadata:
+  name: parent-product
+  description: A parent product that contains other products
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
+    backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml
+  tags:
+    - parent
+    - suite
+spec:
+  type: product-suite
+  lifecycle: production
+  owner: team-platform
+  market: global
+  childProducts:
+    - child-product-a
+    - child-product-b
+  systems:
+    - platform-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: Product
+metadata:
+  name: child-product-a
+  description: A child product focusing on specific functionality
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
+    backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml
+  tags:
+    - child
+    - service
+spec:
+  type: service
+  lifecycle: production
+  owner: team-a
+  market: europe
+  parentProduct: parent-product
+  components:
+    - service-a-frontend
+    - service-a-backend
+---
+apiVersion: backstage.io/v1alpha1
+kind: Product
+metadata:
+  name: child-product-b
+  description: Another child product with different functionality
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
+    backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml
+  tags:
+    - child
+    - app
+spec:
+  type: mobile-app
+  lifecycle: beta
+  owner: team-b
+  market: north-america
+  parentProduct: parent-product
+  childProducts:
+    - grandchild-product-x
+  components:
+    - app-mobile
+    - app-backend
+---
+apiVersion: backstage.io/v1alpha1
+kind: Product
+metadata:
+  name: grandchild-product-x
+  description: A grandchild product (nested two levels deep)
+  annotations:
+    backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
+    backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml
+  tags:
+    - grandchild
+    - feature
+spec:
+  type: feature
+  lifecycle: alpha
+  owner: team-x
+  market: asia-pacific
+  parentProduct: child-product-b
+  components:
+    - feature-x-ui
+    - feature-x-api

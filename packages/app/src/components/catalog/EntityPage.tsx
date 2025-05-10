@@ -1,4 +1,5 @@
 import { Button, Grid } from '@material-ui/core';
+import { ProductAboutCard, ProductRelationsCard } from './EntityProductCards';
 import {
   EntityApiDefinitionCard,
   EntityConsumedApisCard,
@@ -49,6 +50,10 @@ import {
   RELATION_PART_OF,
   RELATION_PROVIDES_API,
 } from '@backstage/catalog-model';
+
+// Custom relation types for product hierarchy
+const RELATION_PARENT_OF = 'parentOf';
+const RELATION_CHILD_OF = 'childOf';
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
@@ -402,10 +407,19 @@ const productPage = (
       <Grid container spacing={3} alignItems="stretch">
         {entityWarningContent}
         <Grid item md={6}>
-          <EntityAboutCard variant="gridItem" />
+          <ProductAboutCard variant="gridItem" />
         </Grid>
         <Grid item md={6} xs={12}>
           <EntityCatalogGraphCard variant="gridItem" height={400} />
+        </Grid>
+        <Grid item md={4} xs={12}>
+          <ProductRelationsCard variant="gridItem" />
+        </Grid>
+        <Grid item md={4} xs={12}>
+          <EntityLinksCard />
+        </Grid>
+        <Grid item md={4} xs={12}>
+          <EntityOwnershipCard variant="gridItem" />
         </Grid>
         <Grid item md={6}>
           <EntityHasComponentsCard variant="gridItem" />
@@ -414,6 +428,23 @@ const productPage = (
           <EntityHasSystemsCard variant="gridItem" />
         </Grid>
       </Grid>
+    </EntityLayout.Route>
+    <EntityLayout.Route path="/diagram" title="Diagram">
+      <EntityCatalogGraphCard
+        variant="gridItem"
+        direction={Direction.TOP_BOTTOM}
+        title="Product Diagram"
+        height={700}
+        relations={[
+          RELATION_PART_OF,
+          RELATION_HAS_PART,
+          RELATION_CONSUMES_API,
+          RELATION_PROVIDES_API,
+          RELATION_PARENT_OF,
+          RELATION_CHILD_OF,
+        ]}
+        unidirectional={false}
+      />
     </EntityLayout.Route>
   </EntityLayout>
 );
