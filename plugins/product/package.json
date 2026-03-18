@@ -16,7 +16,8 @@
     "types": "dist/index.d.ts"
   },
   "backstage": {
-    "role": "frontend-plugin"
+    "role": "frontend-plugin",
+    "pluginId": "product"
   },
   "sideEffects": false,
   "scripts": {
