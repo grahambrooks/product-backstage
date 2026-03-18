@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://npm.pkg.github.com
+          scope: '@grahambrooks'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Check types
+        run: yarn tsc
+
+      - name: Lint
+        run: yarn lint:all
+
+      - name: Test
+        run: yarn test:all
+
+      - name: Build plugins
+        run: |
+          yarn workspace @internal/plugin-product build
+          yarn workspace @internal/plugin-product-backend build
+
+      - name: Prepare packages for release
+        run: ./scripts/prepare-release.sh
+
+      - name: Publish @grahambrooks/plugin-product
+        working-directory: plugins/product
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish @grahambrooks/plugin-product-backend
+        working-directory: plugins/product-backend
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
