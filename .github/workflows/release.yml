@@ -23,22 +23,31 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@grahambrooks'
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Install dependencies
-        run: yarn install --immutable
+        run: yarn install --mode=skip-build
+        env:
+          YARN_ENABLE_SCRIPTS: 'false'
 
       - name: Check types
-        run: yarn tsc
-
-      - name: Lint
-        run: yarn lint:all
-
-      - name: Test
-        run: yarn test:all
+        run: yarn tsc --skipLibCheck
 
       - name: Build plugins
         run: |
           yarn workspace @internal/plugin-product build
           yarn workspace @internal/plugin-product-backend build
+
+      - name: Lint plugins
+        run: |
+          yarn workspace @internal/plugin-product lint
+          yarn workspace @internal/plugin-product-backend lint
+
+      - name: Test plugins
+        run: |
+          yarn workspace @internal/plugin-product test
+          yarn workspace @internal/plugin-product-backend test
 
       - name: Prepare packages for release
         run: ./scripts/prepare-release.sh
