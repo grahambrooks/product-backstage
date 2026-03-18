@@ -34,15 +34,15 @@ jobs:
       - name: Check types
         run: yarn tsc --project tsconfig.plugins.json --skipLibCheck
 
-      - name: Build plugins
-        run: |
-          yarn workspace @internal/plugin-product build
-          yarn workspace @internal/plugin-product-backend build
-
       - name: Lint plugins
         run: |
           yarn workspace @internal/plugin-product lint
           yarn workspace @internal/plugin-product-backend lint
+
+      - name: Build plugins
+        run: |
+          yarn workspace @internal/plugin-product build
+          yarn workspace @internal/plugin-product-backend build
 
       - name: Test plugins
         run: |
