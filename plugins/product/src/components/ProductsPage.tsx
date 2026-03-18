@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo, useCallback} from 'react';
+import {memo, useState, useEffect, useMemo, useCallback} from 'react';
 import {
     makeStyles,
     Grid,
@@ -139,7 +139,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     },
 }));
 
-const ProductCard = React.memo(({product}: { product: Entity }) => {
+const ProductCard = memo(({product}: { product: Entity }) => {
     const classes = useStyles();
     const navigate = useNavigate();
 
