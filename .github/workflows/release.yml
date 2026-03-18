@@ -32,7 +32,7 @@ jobs:
           YARN_ENABLE_SCRIPTS: 'false'
 
       - name: Check types
-        run: yarn tsc --skipLibCheck
+        run: yarn tsc --project tsconfig.plugins.json --skipLibCheck
 
       - name: Build plugins
         run: |

@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   CardContent,
   Chip,
@@ -88,12 +87,12 @@ export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
     spec = {},
   } = entity;
 
-  const type = spec.type || '';
-  const lifecycle = spec.lifecycle || '';
-  const owner = spec.owner || '';
-  const market = spec.market || '';
-  const parentProduct = spec.parentProduct || '';
-  const childProducts = spec.childProducts || [];
+  const type = (spec.type as string) || '';
+  const lifecycle = (spec.lifecycle as string) || '';
+  const owner = (spec.owner as string) || '';
+  const market = (spec.market as string) || '';
+  const parentProduct = (spec.parentProduct as string) || '';
+  const childProducts = (spec.childProducts as string[]) || [];
 
   // Generate a nicer title for the entity
   const title = formatEntityName(name);
