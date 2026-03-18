@@ -14,6 +14,7 @@ import {
     SupportButton,
     Progress,
     ErrorPanel,
+    MarkdownContent,
 } from '@backstage/core-components';
 import {useApi} from '@backstage/core-plugin-api';
 import {catalogApiRef} from '@backstage/plugin-catalog-react';
@@ -30,9 +31,9 @@ import PublicIcon from '@material-ui/icons/Public';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import FilterListIcon from '@material-ui/icons/FilterList';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import {
     formatEntityName,
-    getProductImageUrl,
     getInitials,
     getEntityColor,
 } from './utils';
@@ -53,6 +54,10 @@ const useStyles = makeStyles((theme: Theme) => ({
     media: {
         height: 140,
         backgroundSize: 'contain',
+    },
+    mediaPlaceholder: {
+        height: 140,
+        backgroundColor: theme.palette.grey[100],
     },
     marketChip: {
         margin: theme.spacing(0.5),
@@ -124,6 +129,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     filterIcon: {
         marginRight: theme.spacing(1),
     },
+    tagChip: {
+        margin: theme.spacing(0.25),
+    },
+    tags: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        marginTop: theme.spacing(1),
+    },
 }));
 
 const ProductCard = React.memo(({product}: { product: Entity }) => {
@@ -134,6 +147,8 @@ const ProductCard = React.memo(({product}: { product: Entity }) => {
     const market = (spec.market as string) || '';
     const type = (spec.type as string) || '';
     const lifecycle = (spec.lifecycle as string) || '';
+    const imageUrl = (spec.imageUrl as string) || '';
+    const tags = product.metadata.tags || [];
 
     const formattedTitle = formatEntityName(product.metadata.name);
     const description = product.metadata.description ?? 'No description provided';
@@ -145,17 +160,15 @@ const ProductCard = React.memo(({product}: { product: Entity }) => {
 
     return (
         <Card className={classes.card}>
-            <CardMedia
-                className={classes.media}
-                image={getProductImageUrl(product)}
-                title={formattedTitle}
-                onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
-                    // Fallback to a local SVG image if the image fails to load
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null; // Prevent infinite loop
-                    target.src = '/product-placeholder.svg';
-                }}
-            />
+            {imageUrl ? (
+                <CardMedia
+                    className={classes.media}
+                    image={imageUrl}
+                    title={formattedTitle}
+                />
+            ) : (
+                <div className={classes.mediaPlaceholder} />
+            )}
             <CardContent className={classes.cardContent}>
                 <Typography
                     gutterBottom
@@ -166,13 +179,9 @@ const ProductCard = React.memo(({product}: { product: Entity }) => {
                     {formattedTitle}
                 </Typography>
 
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    className={classes.description}
-                >
-                    {description}
-                </Typography>
+                <div className={classes.description}>
+                    <MarkdownContent content={description} dialect="gfm" />
+                </div>
 
                 <div className={classes.infoSection}>
                     <div className={classes.chips}>
@@ -208,6 +217,21 @@ const ProductCard = React.memo(({product}: { product: Entity }) => {
                         size="small"
                     />
                 </div>
+
+                {tags.length > 0 && (
+                    <div className={classes.tags}>
+                        {tags.map(tag => (
+                            <Chip
+                                key={tag}
+                                size="small"
+                                label={tag}
+                                icon={<LocalOfferIcon fontSize="small" />}
+                                variant="outlined"
+                                className={classes.tagChip}
+                            />
+                        ))}
+                    </div>
+                )}
             </CardContent>
             <CardActions>
                 <Button size="small" color="primary" onClick={handleViewDetails}>
@@ -220,17 +244,24 @@ const ProductCard = React.memo(({product}: { product: Entity }) => {
 
 ProductCard.displayName = 'ProductCard';
 
-type ProductsPageProps = {
+/**
+ * Props for the ProductsPage component.
+ * @public
+ */
+export type ProductsPageProps = {
     title?: string;
 };
 
+/**
+ * A page component that displays a filterable grid of product entities.
+ * @public
+ */
 export const ProductsPage = ({title = 'Products'}: ProductsPageProps) => {
     const classes = useStyles();
     const catalogApi = useApi(catalogApiRef);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<Error | null>(null);
     const [products, setProducts] = useState<Entity[]>([]);
-    // Filtered products are now computed with useMemo
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [selectedMarket, setSelectedMarket] = useState<string>('');
     const [selectedType, setSelectedType] = useState<string>('');
@@ -391,75 +422,77 @@ export const ProductsPage = ({title = 'Products'}: ProductsPageProps) => {
                     <Typography variant="subtitle2">Filters</Typography>
                 </div>
 
-                {availableMarkets.length > 0 && (
-                    <Box mb={2}>
-                        <Typography variant="body2" color="textSecondary">
-                            Market
-                        </Typography>
-                        <div className={classes.filterContainer}>
-                            <Chip
-                                label="All Markets"
-                                onClick={() => setSelectedMarket('')}
-                                className={classes.filterChip}
-                                style={{
-                                    backgroundColor: !selectedMarket ? '#2E77D0' : undefined,
-                                    color: !selectedMarket ? '#ffffff' : undefined,
-                                }}
-                                size="small"
-                            />
-                            {availableMarkets.map(market => (
+                <Box display="flex" flexWrap="wrap" style={{ gap: '16px' }}>
+                    {availableMarkets.length > 0 && (
+                        <Box flex="1" minWidth={200}>
+                            <Typography variant="body2" color="textSecondary">
+                                Market
+                            </Typography>
+                            <div className={classes.filterContainer}>
                                 <Chip
-                                    key={market}
-                                    label={market}
-                                    onClick={() => setSelectedMarket(market)}
+                                    label="All Markets"
+                                    onClick={() => setSelectedMarket('')}
                                     className={classes.filterChip}
                                     style={{
-                                        backgroundColor:
-                                            selectedMarket === market ? '#2E77D0' : undefined,
-                                        color: selectedMarket === market ? '#ffffff' : undefined,
+                                        backgroundColor: !selectedMarket ? '#2E77D0' : undefined,
+                                        color: !selectedMarket ? '#ffffff' : undefined,
                                     }}
                                     size="small"
-                                    icon={<PublicIcon fontSize="small"/>}
                                 />
-                            ))}
-                        </div>
-                    </Box>
-                )}
+                                {availableMarkets.map(market => (
+                                    <Chip
+                                        key={market}
+                                        label={market}
+                                        onClick={() => setSelectedMarket(market)}
+                                        className={classes.filterChip}
+                                        style={{
+                                            backgroundColor:
+                                                selectedMarket === market ? '#2E77D0' : undefined,
+                                            color: selectedMarket === market ? '#ffffff' : undefined,
+                                        }}
+                                        size="small"
+                                        icon={<PublicIcon fontSize="small"/>}
+                                    />
+                                ))}
+                            </div>
+                        </Box>
+                    )}
 
-                {availableTypes.length > 0 && (
-                    <Box mb={2}>
-                        <Typography variant="body2" color="textSecondary">
-                            Type
-                        </Typography>
-                        <div className={classes.filterContainer}>
-                            <Chip
-                                label="All Types"
-                                onClick={() => setSelectedType('')}
-                                className={classes.filterChip}
-                                style={{
-                                    backgroundColor: !selectedType ? '#2E77D0' : undefined,
-                                    color: !selectedType ? '#ffffff' : undefined,
-                                }}
-                                size="small"
-                            />
-                            {availableTypes.map(type => (
+                    {availableTypes.length > 0 && (
+                        <Box flex="1" minWidth={200}>
+                            <Typography variant="body2" color="textSecondary">
+                                Type
+                            </Typography>
+                            <div className={classes.filterContainer}>
                                 <Chip
-                                    key={type}
-                                    label={type}
-                                    onClick={() => setSelectedType(type)}
+                                    label="All Types"
+                                    onClick={() => setSelectedType('')}
                                     className={classes.filterChip}
                                     style={{
-                                        backgroundColor:
-                                            selectedType === type ? '#2E77D0' : undefined,
-                                        color: selectedType === type ? '#ffffff' : undefined,
+                                        backgroundColor: !selectedType ? '#2E77D0' : undefined,
+                                        color: !selectedType ? '#ffffff' : undefined,
                                     }}
                                     size="small"
-                                    icon={<CategoryIcon fontSize="small"/>}
                                 />
-                            ))}
-                        </div>
-                    </Box>
-                )}
+                                {availableTypes.map(type => (
+                                    <Chip
+                                        key={type}
+                                        label={type}
+                                        onClick={() => setSelectedType(type)}
+                                        className={classes.filterChip}
+                                        style={{
+                                            backgroundColor:
+                                                selectedType === type ? '#2E77D0' : undefined,
+                                            color: selectedType === type ? '#ffffff' : undefined,
+                                        }}
+                                        size="small"
+                                        icon={<CategoryIcon fontSize="small"/>}
+                                    />
+                                ))}
+                            </div>
+                        </Box>
+                    )}
+                </Box>
             </div>
 
             <Grid container spacing={3}>
@@ -476,4 +509,3 @@ export const ProductsPage = ({title = 'Products'}: ProductsPageProps) => {
         </Content>
     );
 };
-

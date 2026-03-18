@@ -1,5 +1,5 @@
 import { Button, Grid } from '@material-ui/core';
-import { ProductAboutCard, ProductRelationsCard } from './EntityProductCards';
+import { ProductAboutCard, ProductRelationsCard } from '@internal/plugin-product';
 import {
   EntityApiDefinitionCard,
   EntityConsumedApisCard,

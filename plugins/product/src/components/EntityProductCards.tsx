@@ -1,8 +1,6 @@
 import React from 'react';
 import {
-  Card,
   CardContent,
-  CardHeader,
   Chip,
   Divider,
   Grid,
@@ -13,32 +11,21 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import {
-  headerStyles,
   InfoCard,
   InfoCardVariants,
   Link,
+  MarkdownContent,
   Progress,
-  WarningPanel
 } from '@backstage/core-components';
 import { useEntity } from '@backstage/plugin-catalog-react';
-import {
-  parseEntityRef,
-  stringifyEntityRef,
-} from '@backstage/catalog-model';
 import PublicIcon from '@material-ui/icons/Public';
 import BusinessIcon from '@material-ui/icons/Business';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import BuildIcon from '@material-ui/icons/Build';
 import CategoryIcon from '@material-ui/icons/Category';
-
-// Helper function to format entity names from kebab-case to Title Case
-const formatEntityName = (name: string): string => {
-  return name
-    .split('-')
-    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ');
-};
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import { formatEntityName } from './utils';
 
 const useStyles = makeStyles({
   links: {
@@ -66,12 +53,28 @@ const useStyles = makeStyles({
   description: {
     wordBreak: 'break-word',
   },
+  tagChip: {
+    margin: '2px',
+  },
+  tags: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    marginTop: '8px',
+  },
 });
 
-type ProductAboutCardProps = {
+/**
+ * Props for the ProductAboutCard component.
+ * @public
+ */
+export type ProductAboutCardProps = {
   variant?: InfoCardVariants;
 };
 
+/**
+ * An entity card that displays product details including type, lifecycle, owner, and market.
+ * @public
+ */
 export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
   const { entity } = useEntity();
   const classes = useStyles();
@@ -81,7 +84,7 @@ export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
   }
 
   const {
-    metadata: { name, description },
+    metadata: { name, description, tags = [] },
     spec = {},
   } = entity;
 
@@ -98,42 +101,31 @@ export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
   // Format entity references
   const getEntityRefLinks = (refs: string[]) => {
     return refs.map(ref => {
-      try {
-        const parsed = parseEntityRef(ref);
-        const entityName = parsed.name;
-        const formattedName = formatEntityName(entityName);
-
-        const entityRef = stringifyEntityRef(parsed);
-
-        return (
-          <ListItem key={entityRef}>
-            <ListItemIcon>
-              <ArrowDownwardIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText 
-              primary={
-                <Link to={`/catalog/${entityRef}`}>{formattedName}</Link>
-              }
-            />
-          </ListItem>
-        );
-      } catch (err) {
-        return (
-          <ListItem key={ref}>
-            <ListItemText primary={ref} />
-          </ListItem>
-        );
-      }
+      const formattedName = formatEntityName(ref);
+      return (
+        <ListItem key={ref}>
+          <ListItemIcon>
+            <ArrowDownwardIcon fontSize="small" />
+          </ListItemIcon>
+          <ListItemText
+            primary={
+              <Link to={`/catalog/default/product/${ref}`}>{formattedName}</Link>
+            }
+          />
+        </ListItem>
+      );
     });
   };
 
   return (
     <InfoCard
       title={title}
-      subheader={description}
       variant={variant}
     >
       <CardContent>
+        {description && (
+          <MarkdownContent content={description} dialect="gfm" />
+        )}
         <Grid container>
           <Grid item xs={12} sm={6} md={6}>
             <div className={classes.label}>Type</div>
@@ -147,9 +139,9 @@ export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
 
             <div className={classes.label}>Lifecycle</div>
             <div className={classes.value}>
-              <Chip 
-                size="small" 
-                label={lifecycle} 
+              <Chip
+                size="small"
+                label={lifecycle}
                 icon={<BuildIcon fontSize="small" />}
               />
             </div>
@@ -171,18 +163,18 @@ export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
           <Grid item xs={12} sm={6} md={6}>
             <div className={classes.label}>Owner</div>
             <div className={classes.value}>
-              <Chip 
-                size="small" 
-                label={owner} 
+              <Chip
+                size="small"
+                label={owner}
                 icon={<BusinessIcon fontSize="small" />}
               />
             </div>
-            
+
             {parentProduct && (
               <>
                 <div className={classes.label}>Parent Product</div>
                 <div className={classes.value}>
-                  <Link to={`/catalog/${stringifyEntityRef({namespace: 'default', kind: 'Product', name: parentProduct})}`}>
+                  <Link to={`/catalog/default/product/${parentProduct}`}>
                     {formatEntityName(parentProduct)}
                   </Link>
                 </div>
@@ -190,6 +182,25 @@ export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
             )}
           </Grid>
         </Grid>
+
+        {tags && tags.length > 0 && (
+          <>
+            <Divider style={{ margin: '16px 0' }} />
+            <div className={classes.label}>Tags</div>
+            <div className={classes.tags}>
+              {tags.map(tag => (
+                <Chip
+                  key={tag}
+                  size="small"
+                  label={tag}
+                  icon={<LocalOfferIcon fontSize="small" />}
+                  variant="outlined"
+                  className={classes.tagChip}
+                />
+              ))}
+            </div>
+          </>
+        )}
 
         {childProducts.length > 0 && (
           <>
@@ -206,7 +217,8 @@ export const ProductAboutCard = ({ variant }: ProductAboutCardProps) => {
 };
 
 /**
- * A card displaying product hierarchy relations
+ * An entity card that displays product hierarchy relations.
+ * @public
  */
 export const ProductRelationsCard = ({ variant }: { variant?: InfoCardVariants }) => {
   const { entity } = useEntity();
@@ -239,9 +251,9 @@ export const ProductRelationsCard = ({ variant }: { variant?: InfoCardVariants }
                 <ListItemIcon>
                   <ArrowUpwardIcon fontSize="small" />
                 </ListItemIcon>
-                <ListItemText 
+                <ListItemText
                   primary={
-                    <Link to={`/catalog/${stringifyEntityRef({namespace: 'default', kind: 'Product', name: parentProduct})}`}>
+                    <Link to={`/catalog/default/product/${parentProduct}`}>
                       {formatEntityName(parentProduct)}
                     </Link>
                   }
@@ -250,7 +262,7 @@ export const ProductRelationsCard = ({ variant }: { variant?: InfoCardVariants }
             </List>
           </>
         )}
-        
+
         {childProducts.length > 0 && (
           <>
             {parentProduct && <Divider style={{ margin: '16px 0' }} />}
@@ -261,9 +273,9 @@ export const ProductRelationsCard = ({ variant }: { variant?: InfoCardVariants }
                   <ListItemIcon>
                     <ArrowDownwardIcon fontSize="small" />
                   </ListItemIcon>
-                  <ListItemText 
+                  <ListItemText
                     primary={
-                      <Link to={`/catalog/${stringifyEntityRef({namespace: 'default', kind: 'Product', name: childProduct})}`}>
+                      <Link to={`/catalog/default/product/${childProduct}`}>
                         {formatEntityName(childProduct)}
                       </Link>
                     }

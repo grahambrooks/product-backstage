@@ -2,7 +2,17 @@ apiVersion: backstage.io/v1alpha1
 kind: Product
 metadata:
   name: parent-product
-  description: A parent product that contains other products
+  description: |
+    A **comprehensive product suite** that serves as the umbrella for all child products.
+
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+    ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+    ### Key Features
+    - *Multi-market* support across all regions
+    - Integrated **monitoring** and alerting
+    - Automated deployment pipelines via `CI/CD`
   annotations:
     backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
     backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml
@@ -14,6 +24,7 @@ spec:
   lifecycle: production
   owner: team-platform
   market: global
+  imageUrl: https://picsum.photos/id/237/800/200
   childProducts:
     - child-product-a
     - child-product-b
@@ -24,7 +35,19 @@ apiVersion: backstage.io/v1alpha1
 kind: Product
 metadata:
   name: child-product-a
-  description: A child product focusing on specific functionality
+  description: |
+    A child product focusing on **backend services** for the European market.
+
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+    deserunt mollit anim id est laborum.
+
+    > This product handles all payment processing and user authentication for the EU region.
+
+    Key integrations include:
+    1. OAuth 2.0 identity provider
+    2. PCI-DSS compliant payment gateway
+    3. GDPR data residency controls
   annotations:
     backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
     backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml
@@ -45,7 +68,17 @@ apiVersion: backstage.io/v1alpha1
 kind: Product
 metadata:
   name: child-product-b
-  description: Another child product with different functionality
+  description: |
+    A **mobile-first** product targeting the North American market.
+
+    Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+    laudantium, totam rem aperiam. Nemo enim ipsam voluptatem quia voluptas sit aspernatur
+    aut odit aut fugit.
+
+    | Platform | Status | Downloads |
+    |----------|--------|-----------|
+    | iOS      | Live   | 1.2M      |
+    | Android  | Live   | 2.4M      |
   annotations:
     backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
     backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml
@@ -68,7 +101,18 @@ apiVersion: backstage.io/v1alpha1
 kind: Product
 metadata:
   name: grandchild-product-x
-  description: A grandchild product (nested two levels deep)
+  description: |
+    An **experimental feature** product nested two levels deep, exploring new capabilities
+    in the Asia-Pacific region.
+
+    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+    voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint.
+
+    ```
+    Status: Alpha
+    Region: APAC
+    Team:   team-x
+    ```
   annotations:
     backstage.io/managed-by-location: url:https://github.com/example/repo/catalog-info.yaml
     backstage.io/managed-by-origin-location: url:https://github.com/example/repo/catalog-info.yaml

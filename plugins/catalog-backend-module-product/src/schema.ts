@@ -18,6 +18,7 @@ export const productEntityV1alpha1Schema = z.object({
     lifecycle: z.string(),
     owner: z.string(),
     market: z.string().optional(),
+    imageUrl: z.string().url().optional(),
     parentProduct: z.string().optional(),
     childProducts: z.array(z.string()).optional(),
     components: z.array(z.string()).optional(),
