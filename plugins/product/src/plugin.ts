@@ -1,4 +1,5 @@
 import {
+  createComponentExtension,
   createPlugin,
   createRoutableExtension,
 } from '@backstage/core-plugin-api';
@@ -31,29 +32,31 @@ export const ProductsExplorerPage = productPlugin.provide(
 );
 
 /**
- * An entity content component that displays product details.
+ * An entity card that displays product details.
  * @public
  */
 export const EntityProductAboutCard = productPlugin.provide(
-  createRoutableExtension({
+  createComponentExtension({
     name: 'EntityProductAboutCard',
-    component: () =>
-      import('./components/EntityProductCards').then(m => m.ProductAboutCard),
-    mountPoint: rootRouteRef,
+    component: {
+      lazy: () =>
+        import('./components/EntityProductCards').then(m => m.ProductAboutCard),
+    },
   }),
 );
 
 /**
- * An entity content component that displays product hierarchy relations.
+ * An entity card that displays product hierarchy relations.
  * @public
  */
 export const EntityProductRelationsCard = productPlugin.provide(
-  createRoutableExtension({
+  createComponentExtension({
     name: 'EntityProductRelationsCard',
-    component: () =>
-      import('./components/EntityProductCards').then(
-        m => m.ProductRelationsCard,
-      ),
-    mountPoint: rootRouteRef,
+    component: {
+      lazy: () =>
+        import('./components/EntityProductCards').then(
+          m => m.ProductRelationsCard,
+        ),
+    },
   }),
 );

@@ -1,9 +1,41 @@
-# The Plugins Folder
+# Plugins
 
-This is where your own plugins and their associated modules live, each in a
-separate folder of its own.
+This workspace contains the Product plugins for Backstage.
 
-If you want to create a new plugin here, go to your project root directory, run
-the command `yarn new`, and follow the on-screen instructions.
+| Plugin                                | Package                            | Description                                                          |
+|---------------------------------------|------------------------------------|----------------------------------------------------------------------|
+| [product](./product/)                 | `@internal/plugin-product`         | Frontend plugin providing the product explorer page and entity cards |
+| [product-backend](./product-backend/) | `@internal/plugin-product-backend` | Backend module adding Product entity support to the catalog          |
 
-You can also check out existing plugins on [the plugin marketplace](https://backstage.io/plugins)!
+## Quick Start
+
+### Backend
+
+```bash
+yarn --cwd packages/backend add @internal/plugin-product-backend
+```
+
+```typescript
+// packages/backend/src/index.ts
+backend.add(import('@internal/plugin-product-backend'));
+```
+
+### Frontend
+
+```bash
+yarn --cwd packages/app add @internal/plugin-product
+```
+
+```tsx
+// packages/app/src/App.tsx
+import {ProductsExplorerPage} from '@internal/plugin-product';
+
+<Route path="/products" element={<ProductsExplorerPage/>}/>
+```
+
+```tsx
+// packages/app/src/components/catalog/EntityPage.tsx
+import {EntityProductAboutCard, EntityProductRelationsCard} from '@internal/plugin-product';
+```
+
+See individual plugin READMEs for full installation details.

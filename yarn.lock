@@ -5385,15 +5385,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@internal/plugin-catalog-backend-module-product@link:../../plugins/catalog-backend-module-product::locator=backend%40workspace%3Apackages%2Fbackend":
+"@internal/plugin-product-backend@link:../../plugins/product-backend::locator=backend%40workspace%3Apackages%2Fbackend":
   version: 0.0.0-use.local
-  resolution: "@internal/plugin-catalog-backend-module-product@link:../../plugins/catalog-backend-module-product::locator=backend%40workspace%3Apackages%2Fbackend"
+  resolution: "@internal/plugin-product-backend@link:../../plugins/product-backend::locator=backend%40workspace%3Apackages%2Fbackend"
   languageName: node
   linkType: soft
 
-"@internal/plugin-catalog-backend-module-product@workspace:plugins/catalog-backend-module-product":
+"@internal/plugin-product-backend@workspace:plugins/product-backend":
   version: 0.0.0-use.local
-  resolution: "@internal/plugin-catalog-backend-module-product@workspace:plugins/catalog-backend-module-product"
+  resolution: "@internal/plugin-product-backend@workspace:plugins/product-backend"
   dependencies:
     "@backstage/backend-common": "npm:^0.25.0"
     "@backstage/backend-plugin-api": "npm:^1.7.0"
@@ -14581,7 +14581,7 @@ __metadata:
     "@backstage/plugin-search-backend-module-techdocs": "npm:^0.4.11"
     "@backstage/plugin-search-backend-node": "npm:^1.4.1"
     "@backstage/plugin-techdocs-backend": "npm:^2.1.5"
-    "@internal/plugin-catalog-backend-module-product": "link:../../plugins/catalog-backend-module-product"
+    "@internal/plugin-product-backend": "link:../../plugins/product-backend"
     app: "link:../app"
     better-sqlite3: "npm:^9.0.0"
     node-gyp: "npm:^10.0.0"

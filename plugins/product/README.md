@@ -5,8 +5,8 @@ A Backstage frontend plugin that provides support for Product entities.
 ## Features
 
 - **ProductsExplorerPage** - A full-page product explorer with search, market and type filters
-- **ProductAboutCard** - An entity card showing product details (type, lifecycle, owner, market, hierarchy)
-- **ProductRelationsCard** - An entity card showing parent/child product relationships
+- **EntityProductAboutCard** - An entity card showing product details (type, lifecycle, owner, market, tags, hierarchy) with markdown description support
+- **EntityProductRelationsCard** - An entity card showing parent/child product relationships
 
 ## Installation
 
@@ -33,17 +33,17 @@ import { ProductsExplorerPage } from '@internal/plugin-product';
 In `packages/app/src/components/catalog/EntityPage.tsx`:
 
 ```tsx
-import { ProductAboutCard, ProductRelationsCard } from '@internal/plugin-product';
+import { EntityProductAboutCard, EntityProductRelationsCard } from '@internal/plugin-product';
 
 // In your product entity page layout:
 <Grid item md={6}>
-  <ProductAboutCard variant="gridItem" />
+  <EntityProductAboutCard variant="gridItem" />
 </Grid>
 <Grid item md={4} xs={12}>
-  <ProductRelationsCard variant="gridItem" />
+  <EntityProductRelationsCard variant="gridItem" />
 </Grid>
 ```
 
 ## Backend
 
-This plugin requires the `@internal/plugin-catalog-backend-module-product` backend module to be installed for Product entity processing. See the [backend module README](../catalog-backend-module-product/README.md) for details.
+This plugin requires `@internal/plugin-product-backend` for Product entity processing. See the [backend plugin README](../product-backend/README.md) for installation instructions.
