@@ -40,7 +40,14 @@
   },
   "resolutions": {
     "@types/react": "^18",
-    "@types/react-dom": "^18"
+    "@types/react-dom": "^18",
+    "undici": "^6.24.1",
+    "koa": "^3.1.2",
+    "fast-xml-parser": "^4.5.4",
+    "yauzl": "^3.2.1",
+    "tar": "^7.5.11",
+    "immutable": "^3.8.3",
+    "svgo": "^2.8.2"
   },
   "prettier": "@backstage/cli/config/prettier",
   "lint-staged": {
