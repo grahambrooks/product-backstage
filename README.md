@@ -117,44 +117,20 @@ yarn workspace @internal/plugin-product build
 yarn workspace @internal/plugin-product-backend build
 ```
 
-## Docker
-
-A pre-built container image is published to GitHub Container Registry for both `linux/amd64` and `linux/arm64`:
-
-```bash
-docker pull ghcr.io/grahambrooks/product-backstage:latest
-```
-
-The fastest way to try it out is with Docker Compose:
-
-```bash
-cd docker
-docker compose up
-```
-
-This starts Backstage with PostgreSQL and example product data at **http://localhost:7007**.
-
-See the [Docker README](./docker/README.md) for configuration options.
-
 ## Releasing
 
-Pushing a version tag triggers workflows that publish:
-
-- **npm packages** to GitHub Packages under the `@grahambrooks` scope
-- **Container image** to `ghcr.io/grahambrooks/product-backstage` (amd64 + arm64)
+Pushing a version tag triggers the release workflow which publishes both plugins to GitHub Packages under the
+`@grahambrooks` scope:
 
 ```bash
 git tag v0.2.0
 git push origin v0.2.0
 ```
 
-Pushes to `main` also build and push the container image tagged as `latest`.
-
 ## Documentation
 
 - [Frontend plugin README](./plugins/product/README.md) — installation, components, and usage
 - [Backend plugin README](./plugins/product-backend/README.md) — schema, hierarchy, and configuration
-- [Docker README](./docker/README.md) — running with Docker Compose
 - [Example product entities](./plugins/product-backend/examples/nested-products.yaml) — nested product hierarchy demo
 
 ## License
