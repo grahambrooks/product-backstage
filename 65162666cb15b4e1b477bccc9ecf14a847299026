@@ -1,0 +1,26 @@
+plugins/product-backend/package.json
+  dd850dab85c4ad1e 3
+plugins/product/package.json
+  dd850dab85c4ad1e 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.3.0",
+  "base_commit_sha": "65162666cb15b4e1b477bccc9ecf14a847299026",
+  "prompts": {
+    "dd850dab85c4ad1e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "22753dc2-46e1-4e26-a56e-02131103004d",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Graham Brooks",
+      "messages": [],
+      "total_additions": 2,
+      "total_deletions": 2,
+      "accepted_lines": 2,
+      "overriden_lines": 0,
+      "messages_url": "https://usegitai.com/cas/3b3282926c2de1bc0b94ce37bfa54cb4fb3da2b5ebb7e64c8bfdae52573e7582"
+    }
+  }
+}
