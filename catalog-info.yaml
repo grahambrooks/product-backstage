@@ -10,17 +10,3 @@ spec:
   type: website
   owner: user:grahambrooks
   lifecycle: experimental
----
-apiVersion: backstage.io/v1alpha1
-kind: Location
-metadata:
-  name: product-backstage-entities
-  description: Catalog entities defined in this repository
-spec:
-  type: url
-  targets:
-    - ./examples/entities.yaml
-    - ./examples/template/template.yaml
-    - ./examples/org.yaml
-    - ./examples/product.yaml
-    - ./plugins/product-backend/examples/nested-products.yaml
