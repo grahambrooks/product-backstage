@@ -4,9 +4,23 @@ metadata:
   name: product-backstage
   description: Supports product and brand entities
   annotations:
-     github.com/project-slug: grahambrooks/product-backstage
+    github.com/project-slug: grahambrooks/product-backstage
   #   backstage.io/techdocs-ref: dir:.
 spec:
   type: website
-  owner: grahambrooks
+  owner: user:grahambrooks
   lifecycle: experimental
+---
+apiVersion: backstage.io/v1alpha1
+kind: Location
+metadata:
+  name: product-backstage-entities
+  description: Catalog entities defined in this repository
+spec:
+  type: url
+  targets:
+    - ./examples/entities.yaml
+    - ./examples/template/template.yaml
+    - ./examples/org.yaml
+    - ./examples/product.yaml
+    - ./plugins/product-backend/examples/nested-products.yaml
