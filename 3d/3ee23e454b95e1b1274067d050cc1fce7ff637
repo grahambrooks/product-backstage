@@ -1,0 +1,20 @@
+CLAUDE.md
+  s_656149f4cbfc01::t_ccf334db28b241 59,61-63
+  s_656149f4cbfc01::t_54985628f0d627 1-58,60,64-70
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "3d3ee23e454b95e1b1274067d050cc1fce7ff637",
+  "prompts": {},
+  "sessions": {
+    "s_656149f4cbfc01": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "254c8782-9f29-4dc8-8359-ddd4ef970012",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Graham Brooks <graham@grahambrooks.com>"
+    }
+  }
+}
