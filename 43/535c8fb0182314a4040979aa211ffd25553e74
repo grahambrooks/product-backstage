@@ -1,0 +1,60 @@
+packages/app/src/components/catalog/EntityPage.tsx
+  s_656149f4cbfc01::t_e2054cf0465f10 2-6
+  s_656149f4cbfc01::t_f5bad68d63a826 417
+tsconfig.plugins.json
+  s_656149f4cbfc01::t_36e868aec5c9f8 7
+package.json
+  s_656149f4cbfc01::t_e50da1448a75e4 33
+packages/app/src/App.tsx
+  s_656149f4cbfc01::t_e8bfd72a2df122 12
+  s_656149f4cbfc01::t_6ce09aa7ca67b8 69
+plugins/product/src/components/utils.test.ts
+  s_656149f4cbfc01::t_5b68efdb4e182d 1-117
+packages/app/src/components/Root/Root.tsx
+  s_656149f4cbfc01::t_2a78eb1dfb3433 8
+  s_656149f4cbfc01::t_d5e2e4563ce5bc 73-77
+plugins/product/src/plugin.ts
+  s_656149f4cbfc01::t_76c6115e486cb6 6,16,35-44
+  s_656149f4cbfc01::t_2ec60a0e165be0 77-91
+plugins/product/package.json
+  s_656149f4cbfc01::t_467baa811c7a88 39
+plugins/product/src/index.ts
+  s_656149f4cbfc01::t_642a29a7aeec27 10,13,15-19
+plugins/product/src/components/utils.ts
+  s_656149f4cbfc01::t_29eeaabae5bf2b 1
+  s_656149f4cbfc01::t_c3dc9ab167cdec 49-104
+plugins/product/src/routes.ts
+  s_656149f4cbfc01::t_aedbe9c4d5da50 10-17
+plugins/product/README.md
+  s_656149f4cbfc01::t_72ffeaf1963178 8,11-12
+  s_656149f4cbfc01::t_69014abd8abd56 29,33,41-45,51-52
+  s_656149f4cbfc01::t_ada01fa8057c4d 13
+plugins/product/src/components/ProductGraph.tsx
+  s_656149f4cbfc01::t_675c92b61ddf5e 248-249,252-258
+  s_656149f4cbfc01::t_f60b6e9065188e 271-276
+  s_656149f4cbfc01::t_076c29591a3fec 347
+  s_656149f4cbfc01::t_ab6f0b38b6d8c8 1-8
+  s_656149f4cbfc01::t_d1378ed16c7e83 299
+  s_656149f4cbfc01::t_b962c4b57ea5dc 9-18,20,26-33,35-37,44-67,177,194-198,200-201,212,214-247,250-251,259-270,277-298,300-346,348-355
+  s_656149f4cbfc01::t_0f6b7a1824f24e 19,21-25,34
+  s_656149f4cbfc01::t_26954414dad4a6 38-43
+  s_656149f4cbfc01::t_0a0df62ba6300a 125
+  s_656149f4cbfc01::t_c6d6779a906a9f 178-193,199,202-211,213
+  s_656149f4cbfc01::t_4a00dc4bcdd103 68-124,126-176
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "43535c8fb0182314a4040979aa211ffd25553e74",
+  "prompts": {},
+  "sessions": {
+    "s_656149f4cbfc01": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "254c8782-9f29-4dc8-8359-ddd4ef970012",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Graham Brooks <graham@grahambrooks.com>"
+    }
+  }
+}
