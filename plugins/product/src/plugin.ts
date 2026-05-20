@@ -3,7 +3,7 @@ import {
   createPlugin,
   createRoutableExtension,
 } from '@backstage/core-plugin-api';
-import { rootRouteRef } from './routes';
+import { graphRouteRef, rootRouteRef } from './routes';
 
 /**
  * The product plugin for Backstage.
@@ -13,6 +13,7 @@ export const productPlugin = createPlugin({
   id: 'product',
   routes: {
     root: rootRouteRef,
+    graph: graphRouteRef,
   },
 });
 
@@ -28,6 +29,19 @@ export const ProductsExplorerPage = productPlugin.provide(
         m => m.ProductsExplorerPage,
       ),
     mountPoint: rootRouteRef,
+  }),
+);
+
+/**
+ * A full-page view of the product hierarchy rendered as a graph.
+ * @public
+ */
+export const ProductGraphPage = productPlugin.provide(
+  createRoutableExtension({
+    name: 'ProductGraphPage',
+    component: () =>
+      import('./components/ProductGraph').then(m => m.ProductGraphPage),
+    mountPoint: graphRouteRef,
   }),
 );
 
@@ -57,6 +71,21 @@ export const EntityProductRelationsCard = productPlugin.provide(
         import('./components/EntityProductCards').then(
           m => m.ProductRelationsCard,
         ),
+    },
+  }),
+);
+
+/**
+ * An entity card that displays the product hierarchy as a graph, centred on
+ * the current product.
+ * @public
+ */
+export const EntityProductGraphCard = productPlugin.provide(
+  createComponentExtension({
+    name: 'EntityProductGraphCard',
+    component: {
+      lazy: () =>
+        import('./components/ProductGraph').then(m => m.ProductGraphCard),
     },
   }),
 );

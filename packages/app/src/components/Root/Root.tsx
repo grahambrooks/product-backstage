@@ -5,6 +5,7 @@ import ExtensionIcon from '@material-ui/icons/Extension';
 import LibraryBooks from '@material-ui/icons/LibraryBooks';
 import CreateComponentIcon from '@material-ui/icons/AddCircleOutline';
 import CategoryIcon from '@material-ui/icons/Category';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import LogoFull from './LogoFull';
 import LogoIcon from './LogoIcon';
 import {
@@ -69,6 +70,11 @@ export const Root = ({ children }: PropsWithChildren<{}>) => (
         {/* Global nav, not org-specific */}
         <SidebarItem icon={HomeIcon} to="catalog" text="Home" />
         <SidebarItem icon={CategoryIcon} to="products" text="Products" />
+        <SidebarItem
+          icon={AccountTreeIcon}
+          to="products/graph"
+          text="Product Graph"
+        />
         <MyGroupsSidebarItem
           singularTitle="My Group"
           pluralTitle="My Groups"
