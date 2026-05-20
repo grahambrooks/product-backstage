@@ -1,0 +1,21 @@
+package.json
+  s_656149f4cbfc01::t_3af1e2ea56a0cc 55
+yarn.lock
+  ai_agent 8596-8599
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.10",
+  "base_commit_sha": "d01ab60d83f0d0781d6965b44f24e6019035f228",
+  "prompts": {},
+  "sessions": {
+    "s_656149f4cbfc01": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "254c8782-9f29-4dc8-8359-ddd4ef970012",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Graham Brooks <graham@grahambrooks.com>"
+    }
+  }
+}
