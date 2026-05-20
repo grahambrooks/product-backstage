@@ -7,8 +7,14 @@
 export {
   productPlugin,
   ProductsExplorerPage,
+  ProductGraphPage,
   EntityProductAboutCard,
   EntityProductRelationsCard,
+  EntityProductGraphCard,
 } from './plugin';
-export { rootRouteRef } from './routes';
+export type {
+  ProductGraphPageProps,
+  ProductGraphCardProps,
+} from './components/ProductGraph';
+export { graphRouteRef, rootRouteRef } from './routes';
 export { isLeafProduct } from './components/utils';

@@ -1,5 +1,9 @@
 import { Button, Grid } from '@material-ui/core';
-import { EntityProductAboutCard, EntityProductRelationsCard } from '@internal/plugin-product';
+import {
+  EntityProductAboutCard,
+  EntityProductRelationsCard,
+  EntityProductGraphCard,
+} from '@internal/plugin-product';
 import {
   EntityApiDefinitionCard,
   EntityConsumedApisCard,
@@ -410,7 +414,7 @@ const productPage = (
           <EntityProductAboutCard variant="gridItem" />
         </Grid>
         <Grid item md={6} xs={12}>
-          <EntityCatalogGraphCard variant="gridItem" height={400} />
+          <EntityProductGraphCard variant="gridItem" height={400} maxDepth={2} />
         </Grid>
         <Grid item md={4} xs={12}>
           <EntityProductRelationsCard variant="gridItem" />
