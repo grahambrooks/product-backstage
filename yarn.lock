@@ -14147,7 +14147,7 @@ __metadata:
     cross-env: "npm:^7.0.0"
     react: "npm:^18.0.2"
     react-dom: "npm:^18.0.2"
-    react-router: "npm:^6.3.0"
+    react-router: "npm:^8.3.0"
     react-router-dom: "npm:^6.3.0"
   languageName: unknown
   linkType: soft
