@@ -49,7 +49,7 @@
     "tar": "^7.5.11",
     "immutable": "^3.8.3",
     "svgo": "^2.8.2",
-    "axios": "^1.16.1",
+    "axios": "^1.18.1",
     "protobufjs": "^7.5.8",
     "@protobufjs/utf8": "^1.1.1",
     "@protobufjs/inquire": "1.1.2",
