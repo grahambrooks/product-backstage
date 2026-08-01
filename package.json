@@ -42,7 +42,7 @@
   "resolutions": {
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "undici": "^6.24.1",
+    "undici": "^6.28.0",
     "koa": "^3.1.2",
     "fast-xml-parser": "^4.5.5",
     "yauzl": "^3.2.1",
