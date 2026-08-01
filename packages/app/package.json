@@ -41,7 +41,7 @@
     "@backstage/ui": "^0.17.0",
     "@internal/plugin-product": "link:../../plugins/product",
     "@material-ui/core": "^4.12.2",
-    "@material-ui/icons": "^4.9.1",
+    "@mui/icons-material": "^5.0.0",
     "react": "^18.0.2",
     "react-dom": "^18.0.2",
     "react-router": "^8.3.0",
