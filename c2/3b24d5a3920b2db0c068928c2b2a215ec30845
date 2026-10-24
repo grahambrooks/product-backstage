@@ -1,0 +1,21 @@
+package.json
+  s_c7db583e01ac64::t_35c5d7ded50c3e 45,52,63,68
+yarn.lock
+  s_c7db583e01ac64::t_851216cdaa8be7 14590-14592,14598,23882-23884,23894,32009-32012,33053-33055,33064
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c23b24d5a3920b2db0c068928c2b2a215ec30845",
+  "prompts": {},
+  "sessions": {
+    "s_c7db583e01ac64": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a64f563f-ca61-4776-97cf-501db44bb230",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Graham Brooks <graham@grahambrooks.com>"
+    }
+  }
+}
